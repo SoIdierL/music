@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+  
+<!-- 指定工作空间，要与接口名相同，源代码没有去看，猜测应该是通过"这里的namespace.下边方法的id"来定位方法的 -->  
+<mapper namespace="com.music.vuemusic.mapper.UserMapper">
+
+	<!-- insert user -->
+	<insert id = "insert" parameterType="com.music.vuemusic.entity.userinfo">
+		INSERT INTO userinfo(username,password,mediaId,sex) VALUES(#{username},#{password},#{mediaId},#{sex});
+	</insert>
+	
+	<!-- update user -->
+	<update id="update" parameterType="com.music.vuemusic.entity.userinfo">
+		UPDATE userinfo SET username=#{username} , password=#{password} ,mediaId=#{mediaId},sex=#{sex} WHERE userId=#{userId}
+	</update>
+	
+	<!-- find user -->
+	<select id="find" parameterType="int" resultType="com.music.vuemusic.entity.userinfo">
+		SELECT * FROM userinfo WHERE userId=#{0}
+	</select>
+
+	<select id="getByUsername" parameterType="String" resultType="com.music.vuemusic.entity.userinfo">
+		SELECT * FROM userinfo WHERE username=#{0}
+	</select>
+	
+	<!-- delete user -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM userinfo WHERE userId=#{0}
+	</delete>
+</mapper>
